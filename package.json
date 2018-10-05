@@ -1,0 +1,55 @@
+{
+    "name": "@0xproject/instant",
+    "version": "0.0.2",
+    "engines": {
+        "node": ">=6.12"
+    },
+    "description": "ZRX Buyer React Component",
+    "scripts": {
+        "build": "webpack --mode production",
+        "watch": "tsc -w",
+        "dev": "webpack-dev-server --mode development",
+        "lint": "tslint --project ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/0xProject/zrx-buyer.git"
+    },
+    "author": "Francesco Agosti",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/0xProject/zrx-buyerissues"
+    },
+    "homepage": "https://github.com/0xProject/zrx-buyer/README.md",
+    "dependencies": {
+        "@0xproject/asset-buyer": "^2.0.0",
+        "@0xproject/types": "^1.1.1",
+        "@0xproject/typescript-typings": "^2.0.2",
+        "@0xproject/utils": "^2.0.2",
+        "@0xproject/web3-wrapper": "^3.0.1",
+        "ethereum-types": "^1.0.8",
+        "lodash": "^4.17.10",
+        "polished": "^2.2.0",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "react-redux": "^5.0.7",
+        "redux": "^4.0.0",
+        "styled-components": "^3.4.9"
+    },
+    "devDependencies": {
+        "@0xproject/tslint-config": "^1.0.8",
+        "@types/lodash": "^4.14.116",
+        "@types/node": "*",
+        "@types/react": "^16.4.7",
+        "@types/react-dom": "^16.0.8",
+        "@types/react-redux": "^6.0.9",
+        "@types/redux": "^3.6.0",
+        "awesome-typescript-loader": "^5.2.1",
+        "make-promises-safe": "^1.1.0",
+        "tslint": "5.11.0",
+        "typescript": "3.0.1",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.1",
+        "webpack-dev-server": "^3.1.9"
+    }
+}
