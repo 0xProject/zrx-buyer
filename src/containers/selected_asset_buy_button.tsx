@@ -20,6 +20,8 @@ interface ConnectedState {
 
 interface ConnectedDispatch {
     onClick?: (buyQuote: BuyQuote) => void;
+    onBuySuccess?: (buyQuote: BuyQuote) => void;
+    onBuyFailure?: (buyQuote: BuyQuote) => void;
 }
 
 const textForState = (state: AsyncProcessState): string => {
@@ -43,18 +45,9 @@ const mapStateToProps = (state: State, _ownProps: SelectedAssetBuyButtonProps): 
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>, ownProps: SelectedAssetBuyButtonProps): ConnectedDispatch => ({
-    onClick: async buyQuote => {
-        // Set loading
-        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.PENDING });
-        try {
-            const txnHash = await assetBuyer.executeBuyQuoteAsync(buyQuote);
-            // tslint:disable-next-line:no-floating-promises
-            await web3Wrapper.awaitTransactionSuccessAsync(txnHash);
-        } catch {
-            dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.FAILURE });
-        }
-        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.SUCCESS });
-    },
+    onClick: buyQuote => dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.PENDING }),
+    onBuySuccess: buyQuote => dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.FAILURE }),
+    onBuyFailure: buyQuote => dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.SUCCESS }),
 });
 
 export const SelectedAssetBuyButton: React.ComponentClass<SelectedAssetBuyButtonProps> = connect(
