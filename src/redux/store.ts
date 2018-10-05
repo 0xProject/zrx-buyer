@@ -9,6 +9,7 @@ export const store: ReduxStore<State> = createStore(reducer);
 // store.subscribe(
 //     _.throttle(() => {
 //         const state = store.getState();
+//         (window as any).latestState = state;
 //         console.log(state);
 //     }, 500),
 // );

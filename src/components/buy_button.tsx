@@ -43,7 +43,10 @@ export class BuyButton extends React.Component<BuyButtonProps> {
         }
         this.props.onClick(this.props.buyQuote);
         try {
-            const txnHash = await assetBuyer.executeBuyQuoteAsync(this.props.buyQuote);
+            const txnHash = await assetBuyer.executeBuyQuoteAsync(this.props.buyQuote, {
+                // HACK: There is a calculation issue in asset-buyer. ETH is refunded anyway so just over-estimate.
+                ethAmount: this.props.buyQuote.worstCaseQuoteInfo.totalEthAmount.mul(2),
+            });
             // tslint:disable-next-line:no-floating-promises
             await web3Wrapper.awaitTransactionSuccessAsync(txnHash);
         } catch {
