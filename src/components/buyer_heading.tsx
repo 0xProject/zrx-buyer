@@ -3,6 +3,7 @@ import { Web3Wrapper } from '@0xproject/web3-wrapper';
 import * as _ from 'lodash';
 import * as React from 'react';
 
+import { ethDecimals } from '../constants';
 import { SelectedAssetAmountInput } from '../containers/selected_asset_amount_input';
 import { ColorOption } from '../style/theme';
 
@@ -10,27 +11,31 @@ import { Container, Flex, Text } from './ui';
 
 export interface BuyerHeadingProps {
     selectedAssetAmount?: BigNumber;
-    ethAmount?: BigNumber;
+    totalEthBaseAmount?: BigNumber;
     ethUsdPrice?: BigNumber;
 }
 
-const displayEthAmount = ({ selectedAssetAmount, ethAmount }: BuyerHeadingProps): string => {
+const displaytotalEthBaseAmount = ({ selectedAssetAmount, totalEthBaseAmount }: BuyerHeadingProps): string => {
     if (_.isUndefined(selectedAssetAmount)) {
         return '0 ETH';
     }
-    if (_.isUndefined(ethAmount)) {
+    if (_.isUndefined(totalEthBaseAmount)) {
         return '...loading';
     }
-    const ethUnitAmount = Web3Wrapper.toUnitAmount(ethAmount, 18);
+    const ethUnitAmount = Web3Wrapper.toUnitAmount(totalEthBaseAmount, ethDecimals);
     const roundedAmount = ethUnitAmount.round(4);
     return `${roundedAmount} ETH`;
 };
 
-const displayUsdAmount = ({ ethAmount, ethUsdPrice }: BuyerHeadingProps): string => {
-    if (_.isUndefined(ethAmount) || _.isUndefined(ethUsdPrice)) {
+const displayUsdAmount = ({ totalEthBaseAmount, selectedAssetAmount, ethUsdPrice }: BuyerHeadingProps): string => {
+    if (_.isUndefined(selectedAssetAmount)) {
+        return '$0.00';
+    }
+    if (_.isUndefined(totalEthBaseAmount) || _.isUndefined(ethUsdPrice)) {
         return '...loading';
     }
-    return `$${ethAmount.mul(ethUsdPrice)}`;
+    const ethUnitAmount = Web3Wrapper.toUnitAmount(totalEthBaseAmount, ethDecimals);
+    return `$${ethUnitAmount.mul(ethUsdPrice).round(2)}`;
 };
 
 export const BuyerHeading: React.StatelessComponent<BuyerHeadingProps> = props => (
@@ -59,7 +64,7 @@ export const BuyerHeading: React.StatelessComponent<BuyerHeadingProps> = props =
             <Flex direction="column" justify="space-between">
                 <Container marginBottom="5px">
                     <Text fontSize="16px" fontColor={ColorOption.white} fontWeight={500}>
-                        {displayEthAmount(props)}
+                        {displaytotalEthBaseAmount(props)}
                     </Text>
                 </Container>
                 <Text fontSize="16px" fontColor={ColorOption.white} opacity={0.7}>

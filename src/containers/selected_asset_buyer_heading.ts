@@ -11,13 +11,13 @@ export interface SelectedAssetBuyerHeadingProps {}
 
 interface ConnectedState {
     selectedAssetAmount?: BigNumber;
-    ethAmount?: BigNumber;
+    totalEthBaseAmount?: BigNumber;
     ethUsdPrice?: BigNumber;
 }
 
 const mapStateToProps = (state: State, _ownProps: SelectedAssetBuyerHeadingProps): ConnectedState => ({
     selectedAssetAmount: state.selectedAssetAmount,
-    ethAmount: _.get(state, 'latestBuyQuote.worstCaseQuoteInfo.totalEthAmount'),
+    totalEthBaseAmount: _.get(state, 'latestBuyQuote.worstCaseQuoteInfo.totalEthAmount'),
     ethUsdPrice: state.ethUsdPrice,
 });
 
