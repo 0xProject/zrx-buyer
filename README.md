@@ -9,9 +9,7 @@
 <body>
     <div id="zeroExBuyerContainer"></div>
     <script>
-        zeroExBuyer.render({
-            // Initialization options
-        }, '#zeroExBuyerContainer');
+        zeroExBuyer.render('#zeroExBuyerContainer');
     </script>
 </body>
 ```
