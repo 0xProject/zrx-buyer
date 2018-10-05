@@ -9,6 +9,7 @@ import { theme, ThemeProvider } from '../style/theme';
 import { ZeroExBuyerContainer } from './zero_ex_buyer_container';
 
 fonts.include();
+// tslint:disable-next-line:no-floating-promises
 fetchAsyncData();
 
 export interface ZeroExBuyerProps {}

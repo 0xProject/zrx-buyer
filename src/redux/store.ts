@@ -9,7 +9,6 @@ export const store: ReduxStore<State> = createStore(reducer);
 // store.subscribe(
 //     _.throttle(() => {
 //         const state = store.getState();
-//         // Persisted state
 //         console.log(state);
 //     }, 500),
 // );

@@ -2,16 +2,18 @@ import { BuyQuote } from '@0xproject/asset-buyer';
 import { BigNumber } from '@0xproject/utils';
 import * as _ from 'lodash';
 
-import { Action, ActionTypes } from '../types';
+import { Action, ActionTypes, SelectedAssetBuyState } from '../types';
 
 export interface State {
-    ethUsdPrice?: BigNumber;
     selectedAssetAmount?: BigNumber;
+    selectedAssetBuyState: SelectedAssetBuyState;
+    ethUsdPrice?: BigNumber;
     latestBuyQuote?: BuyQuote;
 }
 
 export const INITIAL_STATE: State = {
     ethUsdPrice: undefined,
+    selectedAssetBuyState: SelectedAssetBuyState.NONE,
     selectedAssetAmount: undefined,
     latestBuyQuote: undefined,
 };
@@ -32,6 +34,11 @@ export const reducer = (state: State = INITIAL_STATE, action: Action): State => 
             return {
                 ...state,
                 latestBuyQuote: action.data,
+            };
+        case ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE:
+            return {
+                ...state,
+                selectedAssetBuyState: action.data,
             };
         default:
             return state;
