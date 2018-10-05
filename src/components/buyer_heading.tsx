@@ -9,11 +9,15 @@ import { ColorOption } from '../style/theme';
 import { Container, Flex, Text } from './ui';
 
 export interface BuyerHeadingProps {
+    selectedAssetAmount?: BigNumber;
     ethAmount?: BigNumber;
     ethUsdPrice?: BigNumber;
 }
 
-const displayEthAmount = ({ ethAmount }: BuyerHeadingProps): string => {
+const displayEthAmount = ({ selectedAssetAmount, ethAmount }: BuyerHeadingProps): string => {
+    if (_.isUndefined(selectedAssetAmount)) {
+        return '0 ETH';
+    }
     if (_.isUndefined(ethAmount)) {
         return '...loading';
     }

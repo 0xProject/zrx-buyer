@@ -10,11 +10,13 @@ import { BuyerHeading } from '../components/buyer_heading';
 export interface SelectedAssetBuyerHeadingProps {}
 
 interface ConnectedState {
+    selectedAssetAmount?: BigNumber;
     ethAmount?: BigNumber;
     ethUsdPrice?: BigNumber;
 }
 
 const mapStateToProps = (state: State, _ownProps: SelectedAssetBuyerHeadingProps): ConnectedState => ({
+    selectedAssetAmount: state.selectedAssetAmount,
     ethAmount: _.get(state, 'latestBuyQuote.worstCaseQuoteInfo.totalEthAmount'),
     ethUsdPrice: state.ethUsdPrice,
 });

@@ -1,5 +1,6 @@
 import { BigNumber } from '@0xproject/utils';
 import { Web3Wrapper } from '@0xproject/web3-wrapper';
+import * as _ from 'lodash';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -35,11 +36,13 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): ConnectedDispatch => ({
         dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_AMOUNT, data: value });
         // invalidate the last buy quote.
         dispatch({ type: ActionTypes.UPDATE_LATEST_BUY_QUOTE, data: undefined });
-        // get a new buy quote.
-        const baseUnitValue = Web3Wrapper.toBaseUnitAmount(value, zrxDecimals);
-        const newBuyQuote = await assetBuyer.getBuyQuoteForERC20TokenAddressAsync(zrxContractAddress, baseUnitValue);
-        // invalidate the last buy quote.
-        dispatch({ type: ActionTypes.UPDATE_LATEST_BUY_QUOTE, data: newBuyQuote });
+        if (!_.isUndefined(value)) {
+            // get a new buy quote.
+            const baseUnitValue = Web3Wrapper.toBaseUnitAmount(value, zrxDecimals);
+            const newBuyQuote = await assetBuyer.getBuyQuoteForERC20TokenAddressAsync(zrxContractAddress, baseUnitValue);
+            // invalidate the last buy quote.
+            dispatch({ type: ActionTypes.UPDATE_LATEST_BUY_QUOTE, data: newBuyQuote });
+        }
     },
 });
 
