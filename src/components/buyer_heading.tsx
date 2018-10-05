@@ -26,7 +26,7 @@ export const InstantHeading: React.StatelessComponent<InstantHeadingProps> = pro
                 <SelectedAssetAmountInput fontSize="45px" />
                 <Container display="inline-block" marginLeft="10px">
                     <Text fontSize="45px" fontColor={ColorOption.white} textTransform="uppercase">
-                        rep
+                        zrx
                     </Text>
                 </Container>
             </Container>

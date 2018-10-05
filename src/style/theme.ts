@@ -15,7 +15,7 @@ export enum ColorOption {
 }
 
 export const theme: Theme = {
-    primaryColor: '#512D80',
+    primaryColor: '#36323c',
     black: 'black',
     lightGrey: '#999999',
     grey: '#666666',

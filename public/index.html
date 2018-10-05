@@ -8,9 +8,10 @@
     <script type="text/javascript" src="/main.bundle.js" charset="utf-8"></script>
     <style>
         #zeroExBuyerContainer {
-            position: relative;
-            left: 40px;
-            top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         body {
@@ -23,9 +24,7 @@
 <body>
     <div id="zeroExBuyerContainer"></div>
     <script>
-        zeroExInstant.render({
-
-        });
+        zeroExBuyer.render();
     </script>
 </body>
 
