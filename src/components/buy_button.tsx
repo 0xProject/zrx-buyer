@@ -8,7 +8,7 @@ import { Button, Container, Text } from './ui';
 
 export interface BuyButtonProps {
     buyQuote?: BuyQuote;
-    onClick: (buyQuote: BuyQuote) => void;
+    onClick?: (buyQuote: BuyQuote) => void;
     text: string;
 }
 
@@ -26,9 +26,11 @@ export class BuyButton extends React.Component<BuyButtonProps> {
         );
     }
     private readonly _handleClick = () => {
+        // The button is disabled when there is no buy quote anyway.
         if (_.isUndefined(this.props.buyQuote)) {
             return;
         }
         this.props.onClick(this.props.buyQuote);
+
     }
 }

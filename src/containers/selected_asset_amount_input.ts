@@ -8,7 +8,7 @@ import { Dispatch } from 'redux';
 import { zrxContractAddress, zrxDecimals } from '../constants';
 import { State } from '../redux/reducer';
 import { ColorOption } from '../style/theme';
-import { Action, ActionTypes, SelectedAssetBuyState } from '../types';
+import { Action, ActionTypes, AsyncProcessState } from '../types';
 import { assetBuyer } from '../util/asset_buyer';
 
 import { AmountInput } from '../components/amount_input';
@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): ConnectedDispatch => ({
         // invalidate the last buy quote.
         dispatch({ type: ActionTypes.UPDATE_LATEST_BUY_QUOTE, data: undefined });
         // reset our buy state
-        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: SelectedAssetBuyState.NONE });
+        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.NONE });
         if (!_.isUndefined(value)) {
             // get a new buy quote.
             const baseUnitValue = Web3Wrapper.toBaseUnitAmount(value, zrxDecimals);

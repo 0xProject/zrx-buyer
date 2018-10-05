@@ -2,18 +2,18 @@ import { BuyQuote } from '@0xproject/asset-buyer';
 import { BigNumber } from '@0xproject/utils';
 import * as _ from 'lodash';
 
-import { Action, ActionTypes, SelectedAssetBuyState } from '../types';
+import { Action, ActionTypes, AsyncProcessState } from '../types';
 
 export interface State {
     selectedAssetAmount?: BigNumber;
-    selectedAssetBuyState: SelectedAssetBuyState;
+    selectedAssetBuyState: AsyncProcessState;
     ethUsdPrice?: BigNumber;
     latestBuyQuote?: BuyQuote;
 }
 
 export const INITIAL_STATE: State = {
     ethUsdPrice: undefined,
-    selectedAssetBuyState: SelectedAssetBuyState.NONE,
+    selectedAssetBuyState: AsyncProcessState.NONE,
     selectedAssetAmount: undefined,
     latestBuyQuote: undefined,
 };

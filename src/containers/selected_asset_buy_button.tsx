@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { State } from '../redux/reducer';
-import { Action, ActionTypes, SelectedAssetBuyState } from '../types';
+import { Action, ActionTypes, AsyncProcessState } from '../types';
 import { assetBuyer } from '../util/asset_buyer';
 import { web3Wrapper } from '../util/web3_wrapper';
 
@@ -22,15 +22,15 @@ interface ConnectedDispatch {
     onClick?: (buyQuote: BuyQuote) => void;
 }
 
-const textForState = (state: SelectedAssetBuyState): string => {
+const textForState = (state: AsyncProcessState): string => {
     switch (state) {
-        case SelectedAssetBuyState.NONE:
+        case AsyncProcessState.NONE:
             return 'Buy';
-        case SelectedAssetBuyState.PENDING:
+        case AsyncProcessState.PENDING:
             return '...Loading';
-        case SelectedAssetBuyState.SUCCESS:
+        case AsyncProcessState.SUCCESS:
             return 'Success!';
-        case SelectedAssetBuyState.FAILURE:
+        case AsyncProcessState.FAILURE:
             return 'Failed';
         default:
             return 'Buy';
@@ -45,15 +45,15 @@ const mapStateToProps = (state: State, _ownProps: SelectedAssetBuyButtonProps): 
 const mapDispatchToProps = (dispatch: Dispatch<Action>, ownProps: SelectedAssetBuyButtonProps): ConnectedDispatch => ({
     onClick: async buyQuote => {
         // Set loading
-        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: SelectedAssetBuyState.PENDING });
+        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.PENDING });
         try {
             const txnHash = await assetBuyer.executeBuyQuoteAsync(buyQuote);
             // tslint:disable-next-line:no-floating-promises
             await web3Wrapper.awaitTransactionSuccessAsync(txnHash);
         } catch {
-            dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: SelectedAssetBuyState.FAILURE });
+            dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.FAILURE });
         }
-        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: SelectedAssetBuyState.SUCCESS });
+        dispatch({ type: ActionTypes.UPDATE_SELECTED_ASSET_BUY_STATE, data: AsyncProcessState.SUCCESS });
     },
 });
 

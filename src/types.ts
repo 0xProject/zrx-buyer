@@ -1,4 +1,5 @@
-export enum SelectedAssetBuyState {
+// Reusable
+export enum AsyncProcessState {
     NONE,
     PENDING,
     SUCCESS,
