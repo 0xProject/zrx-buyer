@@ -5,9 +5,9 @@ import { ColorOption } from '../style/theme';
 
 import { Container, Flex, Text } from './ui';
 
-export interface InstantHeadingProps {}
+export interface BuyerHeadingProps {}
 
-export const InstantHeading: React.StatelessComponent<InstantHeadingProps> = props => (
+export const BuyerHeading: React.StatelessComponent<BuyerHeadingProps> = props => (
     <Container backgroundColor={ColorOption.primaryColor} padding="20px" width="100%" borderRadius="3px 3px 0px 0px">
         <Container marginBottom="5px">
             <Text
