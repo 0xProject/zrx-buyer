@@ -4,7 +4,7 @@
 
 ```html
 <head>
-    <script type="text/javascript" src="[zeroExBuyerUMDPath]" charset="utf-8"></script>
+    <script type="text/javascript" src="http://zrx-buyer.s3-website-us-east-1.amazonaws.com/main.bundle.js" charset="utf-8"></script>
 </head>
 <body>
     <div id="zeroExBuyerContainer"></div>

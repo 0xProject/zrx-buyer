@@ -9,7 +9,8 @@
         "build": "webpack --mode production",
         "watch": "tsc -w",
         "dev": "webpack-dev-server --mode development",
-        "lint": "tslint --project ."
+        "lint": "tslint --project .",
+        "deploy": "discharge deploy"
     },
     "repository": {
         "type": "git",
@@ -38,6 +39,7 @@
     },
     "devDependencies": {
         "@0xproject/tslint-config": "^1.0.8",
+        "@static/discharge": "^1.2.2",
         "@types/lodash": "^4.14.116",
         "@types/node": "*",
         "@types/react": "^16.4.7",
